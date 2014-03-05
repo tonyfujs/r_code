@@ -1,0 +1,63 @@
+Using for loops to create a batch slidedeck
+========================================================
+author: 
+transition: rotate
+transition-speed: slow
+css: ./theme/default.css
+width: 1200
+height: 800
+
+Simple slide
+========================================================
+
+Your text goes here
+
+
+Two columns slides (equal width)
+========================================================
+
+Left column text goes here
+
+***
+
+Right column text goes here
+
+
+Two columns slides (unequal width)
+========================================================
+left: 70%
+
+Left column text goes here
+
+***
+
+Right column text goes here
+
+
+```{r echo = F, fig.width = 14, fig.height = 9,  results='asis', warning=FALSE}
+### The rest of the slide deck is generated programmatically using a simple for loop
+library(ggplot2) # Load ggplot2
+data <- iris # Load data set
+
+### Create one slide of summary stats for each Species in "data"
+for(j in levels(data$Species)) { # For each Species in "data"
+  
+  dataj <-  data[data$Species == j,] # Create a subset of the data
+  cat(paste("Species: ", j, "\n") )  # Insert slide title
+  cat("==============================================") # Insert slide separator
+  cat("\nleft: 30%\n") # Control slide's left column width
+  
+  # Insert summary statistics in the slide's left column
+  cat(paste("\nPetal mean length =\n", round(mean(dataj$Petal.Length)), "\n")) 
+  cat(paste("\nPetal mean width =\n", round(min(dataj$Petal.Width))), "\n")
+  
+  cat("\n***\n") # Column separator
+  
+  # Insert chart in the slide's right column
+  z<-ggplot(data = dataj, aes(x = Petal.Width, y = Petal.Length)) + 
+    geom_jitter(alpha = 0.3, color = 'blue', size = 6)
+  print(z)
+  
+  cat("\n") # Insert line break 
+} 
+```

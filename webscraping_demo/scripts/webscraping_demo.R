@@ -39,7 +39,7 @@ output$time_stamp <- Sys.time()
 
 ## STEP 4: Save on my computer
 write.table(output,  
-            file = 'twitter.csv', 
+            file = 'C:/Users/Tony/Documents/divers/mini_projects/r_code/webscraping_demo/data/twitter.csv', 
             sep = ',', 
             row.names = FALSE,
             append = TRUE)
